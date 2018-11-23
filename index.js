@@ -1,71 +1,106 @@
 var express = require('express')
 var bodyParser = require('body-parser')
+require('dotenv').config();
 
 const path = require('path')
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8000
+
+const { Pool } = require("pg"); // This is the postgres database connection module.
+const connectionString = process.env.DATABASE_URL;
+const pool = new Pool({connectionString: connectionString});
+
 
 var app = express()
 
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-
+if(process.env.NODE_ENV === 'production'){
+    //set static folder
+    app.use(express.static('client/build'));
+}
 // for parsing application/json
 app.use(bodyParser.json());
 
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.render('pages/index', {price: "Calculator"}))
 
-app.post('/postage', function(req, res) {
-  var w = req.body.weight;
-  var t = req.body.type;
-  var price = "Error: To heavy";
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
-  if (t == "stamp") {
-    if (w < 1) {
-      price = 0.50;
-    } else if (w < 2) {
-      price = 0.71
-    } else if (w < 3) {
-      price = 0.92
-    } else if (w < 3.5) {
-      price = 1.13
-    }
-  } else if (t == "meter") {
-    if (w < 1) {
-      price = 0.47;
-    } else if (w < 2) {
-      price = 0.68
-    } else if (w < 3) {
-      price = 0.89
-    } else if (w < 3.5) {
-      price = 1.10
-    }
-  } else if (t == "flat") {
-    var rate = [1.00, 1.21, 1.42, 1.63, 1.84, 2.05, 2.26, 2.47, 2.68, 2.89, 3.10, 3.31, 3.52]
-    var i = Math.floor(w);
-    if(i < rate.length) {
-      price = rate[i];
-    }
-  } else if (t == "first-class") {
-    var rate = [3.50, 3.50, 3.50, 3.50, 3.75, 3.75, 3.75, 3.75, 4.10, 4.45, 4.80, 5.15, 5.50]
-    var i = Math.floor(w);
-    if(i < rate.length) {
-      price = rate[i];
-    }
-  }
 
-  if (price != "Error: To heavy") {
-    price = "$" + price;
-  }
 
-  res.render('pages/index', {price: price});
-})
+app.get('/', (req, res) => res.render('pages/index'));
 
+app.get('/getPerson', function(request, response) {
+	getPerson(request, response);
+});
+
+
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'pages/index'));
+});
 
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+
+function getPerson(request, response) {
+	// First get the person's id
+	var id = request.query.id;
+
+	// TODO: We should really check here for a valid id before continuing on...
+
+	// use a helper function to query the DB, and provide a callback for when it's done
+	getPersonFromDb(id, function(error, result) {
+		// This is the callback function that will be called when the DB is done.
+		// The job here is just to send it back.
+
+		// Make sure we got a row with the person, then prepare JSON to send back
+		if (error || result == null || result.length != 1) {
+			response.status(500).json({success: false, data: error});
+		} else {
+			var person = result[0];
+			response.status(200).json(result[0]);
+		}
+	});
+}
+
+// This function gets a person from the DB.
+// By separating this out from the handler above, we can keep our model
+// logic (this function) separate from our controller logic (the getPerson function)
+function getPersonFromDb(id, callback) {
+	console.log("Getting person from DB with id: " + id);
+
+	// Set up the SQL that we will use for our query. Note that we can make
+	// use of parameter placeholders just like with PHP's PDO.
+	var sql = "SELECT id, first_name, last_name, birth FROM person WHERE id = $1::int";
+
+	// We now set up an array of all the parameters we will pass to fill the
+	// placeholder spots we left in the query.
+	var params = [id];
+
+	// This runs the query, and then calls the provided anonymous callback function
+	// with the results.
+	pool.query(sql, params, function(err, result) {
+		// If an error occurred...
+		if (err) {
+			console.log("Error in query: ")
+			console.log(err);
+			callback(err, null);
+		}
+
+		// Log this to the console for debugging purposes.
+		console.log("Found result: " + JSON.stringify(result.rows));
+
+
+		// When someone else called this function, they supplied the function
+		// they wanted called when we were all done. Call that function now
+		// and pass it the results.
+
+		// (The first parameter is the error variable, so we will pass null.)
+		callback(null, result.rows);
+	});
+
+} // end of getPersonFromDb
