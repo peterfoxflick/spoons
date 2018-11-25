@@ -78,8 +78,17 @@ exports.start = function(game_id, pool, callback) {
           callback(err, null);
         }
 
+        console.log("Showing enrollment");
+
         // Log this to the console for debugging purposes.
-        console.log("Found enrollment: " + JSON.stringify(result.rows));
+        for (var i = 0; i < result.rows.length; i++) {
+          console.log("Found enrollment: " + JSON.stringify(result.rows[i]));
+        }
+
+        console.log("end enrollment");
+
+
+
 
       });
   }
