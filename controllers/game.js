@@ -1,5 +1,5 @@
 var exports = module.exports = {};
-var model = require("../models/player.js");
+var model = require("../models/game.js");
 
 
 exports.new = function(request, response, pool) {

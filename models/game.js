@@ -57,7 +57,7 @@ exports.get = function(id, pool, callback) {
 //UPDATE
 exports.start = function(id, callback) {
   //Check that name is string and min length
-    var sql = "UPDATE location SET state = 1 WHERE id = $1::int";
+    var sql = "UPDATE game SET state = 1 WHERE id = $1::int";
 
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
@@ -80,7 +80,6 @@ exports.start = function(id, callback) {
       callback(null, result.rows[0]);
     });
   }
-}
 
 
 
