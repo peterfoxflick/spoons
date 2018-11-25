@@ -47,7 +47,7 @@ exports.get = function(request, response, pool) {
 	exports.start = function(request, response, pool) {
 
 			// First get the person's id
-			var id = request.query.game_id;
+			var id = request.query.id;
 
 			// use a helper function to query the DB, and provide a callback for when it's done
 			model.start(id, pool, function(error, result) {
