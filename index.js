@@ -10,7 +10,7 @@ const pool = new Pool({connectionString: connectionString});
 
 
 //Add Controllers
-var location = require('controllers/location.js');
+var location = require('./controllers/location.js');
 
 
 
