@@ -13,7 +13,7 @@ var exports = module.exports = {};
 //CREATE
 exports.create = function(name, pool, callback) {
   //Check that name is string and min length
-    var sql = "INSERT INTO location (name) VALUES ($1::string)";
+    var sql = "INSERT INTO location (name) VALUES ($1)";
 
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
@@ -21,7 +21,7 @@ exports.create = function(name, pool, callback) {
 
     // This runs the query, and then calls the provided anonymous callback function
     // with the results.
-    pool.query(sql, params, function(err, result) {
+    pool.query(sql, params, function(err) {
       // If an error occurred...
       if (err) {
         console.log("Error in query: ")
