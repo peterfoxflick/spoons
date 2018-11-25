@@ -74,10 +74,10 @@ exports.start = function(id, pool, callback) {
       }
 
       // Log this to the console for debugging purposes.
-      console.log("Updated game: " + JSON.stringify(result.rows[0]));
+      console.log("Updated game: " + id);
 
       // (The first parameter is the error variable, so we will pass null.)
-      callback(null, result.rows[0]);
+      callback(null);
     });
   }
 

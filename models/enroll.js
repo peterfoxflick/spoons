@@ -81,11 +81,6 @@ exports.start = function(game_id, pool, callback) {
         // Log this to the console for debugging purposes.
         console.log("Found enrollment: " + JSON.stringify(result.rows));
 
-        
-
-
-
-
       });
   }
 
