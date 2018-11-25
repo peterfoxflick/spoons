@@ -11,7 +11,7 @@ var exports = module.exports = {};
 
 
 //CREATE
-exports.create = function(name, callback) {
+exports.create = function(name, pool, callback) {
   //Check that name is string and min length
   if ((typeof name) == "string"){
     var sql = "INSERT INTO location (name) VALUE $1::string";
@@ -33,11 +33,6 @@ exports.create = function(name, callback) {
       // Log this to the console for debugging purposes.
       console.log("Create new location: " + JSON.stringify(result.rows));
 
-
-      // When someone else called this function, they supplied the function
-      // they wanted called when we were all done. Call that function now
-      // and pass it the results.
-
       // (The first parameter is the error variable, so we will pass null.)
       callback(null, result.rows);
     });
@@ -46,7 +41,9 @@ exports.create = function(name, callback) {
 
 //READ
 exports.get = function(id, pool, callback) {
-      var sql = "SELECT * FROM location WHERE id = $1::int";
+      var sql = "SELECT * FROM location"
+      if(id)
+        sql += " WHERE id = $1::int";
 
       // We now set up an array of all the parameters we will pass to fill the
       // placeholder spots we left in the query.
@@ -63,20 +60,15 @@ exports.get = function(id, pool, callback) {
         }
 
         // Log this to the console for debugging purposes.
-        console.log("Found location: " + JSON.stringify(result.rows[0]));
-
-
-        // When someone else called this function, they supplied the function
-        // they wanted called when we were all done. Call that function now
-        // and pass it the results.
+        console.log("Found location(s): " + JSON.stringify(result.rows));
 
         // (The first parameter is the error variable, so we will pass null.)
-        callback(null, result.rows[0]);
+        callback(null, result.rows);
       });
   }
 
 //UPDATE
-exports.update = function(id, name, callback) {
+exports.update = function(id, name, pool, callback) {
   //Check that name is string and min length
   if ((typeof id) == "number"){
     var sql = "UPDATE location SET name = $2::string WHERE id = $1::int";
@@ -97,11 +89,6 @@ exports.update = function(id, name, callback) {
 
       // Log this to the console for debugging purposes.
       console.log("Updated locatoin: " + JSON.stringify(result.rows[0]));
-
-
-      // When someone else called this function, they supplied the function
-      // they wanted called when we were all done. Call that function now
-      // and pass it the results.
 
       // (The first parameter is the error variable, so we will pass null.)
       callback(null, result.rows[0]);

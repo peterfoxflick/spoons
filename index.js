@@ -41,8 +41,12 @@ app.get('/location', function(request, response) {
 	location.get(request, response, pool);
 });
 
+app.get('/locations', function(request, response) {
+	location.getAll(request, response, pool);
+});
+
 app.post('/location', function(request, response) {
-	location.create(request, response);
+	location.create(request, response, pool);
 });
 
 
