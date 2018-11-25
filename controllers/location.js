@@ -5,6 +5,7 @@ var model = require("../models/location.js");
 exports.create = function(request, response, pool) {
 	// First get the person's id
 	var name = request.query.name;
+	name = "\"" + name + "\"";
 
 	// TODO: We should really check here for a valid id before continuing on...
 

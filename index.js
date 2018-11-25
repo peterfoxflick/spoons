@@ -37,6 +37,7 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.render('pages/index'));
 
 
+//LOCATIONS ///////////////////////////////////////////////////////
 app.get('/location', function(request, response) {
 	location.get(request, response, pool);
 });
@@ -49,6 +50,7 @@ app.post('/location', function(request, response) {
 	location.create(request, response, pool);
 });
 
+//LOCATIONS ///////////////////////////////////////////////////////
 
 
 app.get('*', (request, response) => {
