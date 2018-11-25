@@ -26,14 +26,11 @@ exports.create = function(name, pool, callback) {
       if (err) {
         console.log("Error in query: ")
         console.log(err);
-        callback(err, null);
+        callback(err);
       }
 
-      // Log this to the console for debugging purposes.
-      console.log("Create new location: " + JSON.stringify(result.rows));
-
       // (The first parameter is the error variable, so we will pass null.)
-      callback(null, result.rows);
+      callback(null);
     });
 }
 

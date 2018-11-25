@@ -9,16 +9,15 @@ exports.create = function(request, response, pool) {
 	// TODO: We should really check here for a valid id before continuing on...
 
 	// use a helper function to query the DB, and provide a callback for when it's done
-	model.create(name, pool, function(error, result) {
+	model.create(name, pool, function(error) {
 		// This is the callback function that will be called when the DB is done.
 		// The job here is just to send it back.
 
 		// Make sure we got a row with the person, then prepare JSON to send back
-		if (error || result == null || result.length != 1) {
+		if (error) {
 			response.status(500).json({success: false, data: error});
 		} else {
-			var person = result[0];
-			response.status(200).json(result[0]);
+			response.status(200).json({success: true});
 		}
 	});
 }
