@@ -1,5 +1,7 @@
 var exports = module.exports = {};
 
+const pool = new Pool({connectionString: connectionString});
+
 
 
 // SQL TABLE
