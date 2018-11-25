@@ -66,7 +66,7 @@ exports.start = function(game_id, pool, callback) {
 
       // We now set up an array of all the parameters we will pass to fill the
       // placeholder spots we left in the query.
-      var params = [game_id];
+      var params = [];
 
       // This runs the query, and then calls the provided anonymous callback function
       // with the results.
