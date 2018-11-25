@@ -42,9 +42,9 @@ exports.create = function(name, pool, callback) {
 //READ
 exports.get = function(id, pool, callback) {
       var sql = "SELECT * FROM location"
-      if(id)
+      if(id != -1){
         sql += " WHERE id = $1::int";
-
+      }
       // We now set up an array of all the parameters we will pass to fill the
       // placeholder spots we left in the query.
       var params = [id];
