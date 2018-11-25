@@ -46,7 +46,7 @@ exports.create = function(name, callback) {
 }
 
 //READ
-exports.get = (id, callback) {
+exports.get = function(id, callback) {
       var sql = "SELECT * FROM location WHERE id = $1::int";
 
       // We now set up an array of all the parameters we will pass to fill the
