@@ -62,7 +62,7 @@ exports.get = function(id, pool, callback) {
 
 
 exports.start = function(game_id, pool, callback) {
-      var sql = "SELECT * FROM enrollment WHERE game_id = $1"
+      var sql = "SELECT * FROM enrollment WHERE game_id = 1"
 
       // We now set up an array of all the parameters we will pass to fill the
       // placeholder spots we left in the query.
