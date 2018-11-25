@@ -51,7 +51,7 @@ exports.getAll = function(request, response, pool) {
 		// TODO: We should really check here for a valid id before continuing on...
 
 		// use a helper function to query the DB, and provide a callback for when it's done
-		model.get(-1, pool, function(error, result) {
+		model.getAll(pool, function(error, result) {
 			// This is the callback function that will be called when the DB is done.
 			// The job here is just to send it back.
 
