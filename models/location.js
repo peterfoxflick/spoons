@@ -13,7 +13,6 @@ var exports = module.exports = {};
 //CREATE
 exports.create = function(name, pool, callback) {
   //Check that name is string and min length
-  if ((typeof name) == "string"){
     var sql = "INSERT INTO location (name) VALUES ($1::string)";
 
     // We now set up an array of all the parameters we will pass to fill the
@@ -36,7 +35,6 @@ exports.create = function(name, pool, callback) {
       // (The first parameter is the error variable, so we will pass null.)
       callback(null, result.rows);
     });
-  }
 }
 
 //READ
