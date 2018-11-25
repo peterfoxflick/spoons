@@ -13,6 +13,7 @@ const pool = new Pool({connectionString: connectionString});
 var location = require('./controllers/location.js');
 var player = require('./controllers/player.js');
 var game = require('./controllers/game.js');
+var enroll = require('./controllers/enroll.js');
 
 
 
@@ -78,8 +79,7 @@ app.post('/game/new', function(request, response) {
 
 app.post('/game/start', function(request, response) {
 	game.start(request, response, pool);
-  enroll.target(request, response, pool);
-
+  enroll.start(request, response, pool);
 });
 
 
@@ -98,6 +98,9 @@ app.post('/enroll/tag', function(request, response) {
 	enroll.tag(request, response, pool);
 });
 
+app.get('/target', function(request, response) {
+	enroll.target(request, response, pool);
+});
 
 
 
