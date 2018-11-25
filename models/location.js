@@ -14,7 +14,7 @@ var exports = module.exports = {};
 exports.create = function(name, pool, callback) {
   //Check that name is string and min length
   if ((typeof name) == "string"){
-    var sql = "INSERT INTO location (name) VALUE $1::string";
+    var sql = "INSERT INTO location (name) VALUES ($1::string)";
 
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
