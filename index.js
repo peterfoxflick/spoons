@@ -158,7 +158,7 @@ function locationCreateDB(name, callback) {
 function locationGetDB(id, callback) {
   //Check that name is string and min length
   if ((typeof id) == "number"){
-    var sql = "SELECT * FROM member_copy WHERE id = $1::int";
+    var sql = "SELECT * FROM location WHERE id = $1::int";
 
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
