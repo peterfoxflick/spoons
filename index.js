@@ -40,14 +40,15 @@ app.get('/getPerson', function(request, response) {
 	getPerson(request, response);
 });
 
+app.get('/location', function(request, response) {
+	getLocation(request, response);
+});
 
 app.post('/location', function(request, response) {
 	location.create(request, response);
 });
 
-app.get('/location', function(request, response) {
-	location.get(request, response);
-});
+
 
 app.get('*', (request, response) => {
 	response.sendFile(path.join(__dirname, 'client/build', 'pages/index'));
