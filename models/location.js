@@ -1,12 +1,6 @@
 var exports = module.exports = {};
 
 
-
-const { Pool } = require("pg"); // This is the postgres database connection module.
-const pool = new Pool({connectionString: connectionString});
-
-
-
 // SQL TABLE
 
 // CREATE TABLE location (
@@ -51,7 +45,7 @@ exports.create = function(name, callback) {
 }
 
 //READ
-exports.get = function(id, callback) {
+exports.get = function(id, pool, callback) {
       var sql = "SELECT * FROM location WHERE id = $1::int";
 
       // We now set up an array of all the parameters we will pass to fill the

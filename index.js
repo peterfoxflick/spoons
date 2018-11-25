@@ -38,7 +38,7 @@ app.get('/', (req, res) => res.render('pages/index'));
 
 
 app.get('/location', function(request, response) {
-	location.get(request, response);
+	location.get(request, response, pool);
 });
 
 app.post('/location', function(request, response) {
