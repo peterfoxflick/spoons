@@ -11,11 +11,15 @@ const pool = new Pool({connectionString: connectionString});
 
 //Add Controllers
 var location = require('./controllers/location.js');
+var player = require('./controllers/player.js');
+var game = require('./controllers/game.js');
 
 
 
 var app = express()
 
+app.use(passport.initialize())
+app.use(passport.session())
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
@@ -50,7 +54,56 @@ app.post('/location', function(request, response) {
 	location.create(request, response, pool);
 });
 
-//LOCATIONS ///////////////////////////////////////////////////////
+
+//USER ///////////////////////////////////////////////////////
+
+
+
+app.post('/player/new', function(request, response) {
+	player.new(request, response, pool);
+});
+
+app.post('/player/edit', function(request, response) {
+	player.edit(request, response, pool);
+});
+
+
+
+
+//GAME ///////////////////////////////////////////////////////
+
+
+app.post('/game/new', function(request, response) {
+	game.new(request, response, pool);
+});
+
+app.post('/game/start', function(request, response) {
+	game.start(request, response, pool);
+});
+
+
+
+//ENROLLMENT ///////////////////////////////////////////////////////
+
+app.post('/enroll/add', function(request, response) {
+	enroll.new(request, response, pool);
+});
+
+app.post('/enroll/start', function(request, response) {
+	enroll.start(request, response, pool);
+});
+
+app.post('/enroll/tag', function(request, response) {
+	enroll.tag(request, response, pool);
+});
+
+app.get('/target', function(request, response) {
+	enroll.target(request, response, pool);
+});
+
+
+
+
 
 
 app.get('*', (request, response) => {
@@ -63,64 +116,74 @@ app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
 
-//CREATE
-function locationCreateDB(name, callback) {
-  //Check that name is string and min length
-  if ((typeof name) == "string"){
-    var sql = "INSERT INTO location (name) VALUE $1::string";
-
-    // We now set up an array of all the parameters we will pass to fill the
-    // placeholder spots we left in the query.
-    var params = [name];
-
-    // This runs the query, and then calls the provided anonymous callback function
-    // with the results.
-    pool.query(sql, params, function(err, result) {
-      // If an error occurred...
-      if (err) {
-        console.log("Error in query: ")
-        console.log(err);
-        callback(err, null);
-      }
-
-      // Log this to the console for debugging purposes.
-      console.log("Create new location: " + JSON.stringify(result.rows));
 
 
-      // When someone else called this function, they supplied the function
-      // they wanted called when we were all done. Call that function now
-      // and pass it the results.
 
-      // (The first parameter is the error variable, so we will pass null.)
-      callback(null, result.rows);
-    });
+//PASSPORT STUFF
+
+/*************
+
+var passport = require('passport');
+
+
+passport.use(new LocalStrategy((username, password, callback) => {
+  var sql = "SELECT id, username, password, type FROM users WHERE username=$1";
+
+  // We now set up an array of all the parameters we will pass to fill the
+  // placeholder spots we left in the query.
+  var params = [username];
+
+  // This runs the query, and then calls the provided anonymous callback function
+  // with the results.
+  pool.query(sql, params, function(err) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ")
+      console.log(err);
+      callback(err);
+    }
+
+    if(result.rows.length > 0) {
+      const first = result.rows[0]
+      bcrypt.compare(password, first.password, function(err, res) {
+        if(res) {
+          callback(null, { id: first.id, username: first.username })
+         } else {
+          callback(null, false)
+         }
+       })
+     } else {
+       callback(null, false)
+     }
+}))
+
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+
+passport.deserializeUser((id, callback) => {
+  var sql = "SELECT id, username FROM users WHERE id = $1";
+
+  // We now set up an array of all the parameters we will pass to fill the
+  // placeholder spots we left in the query.
+  var params = [id];
+
+  // This runs the query, and then calls the provided anonymous callback function
+  // with the results.
+  pool.query(sql, params, function(err) {
+    if(err) {
+      console.log("Error when selecting user on session deserialize: ")
+      console.log(err);
+      callback(err);
+    }
   }
-}
 
-//READ
-
-
-function createLocation(request, response) {
-	// First get the person's id
-	var name = request.query.name;
-
-	// TODO: We should really check here for a valid id before continuing on...
-
-	// use a helper function to query the DB, and provide a callback for when it's done
-	locationCreateDB(name, function(error, result) {
-		// This is the callback function that will be called when the DB is done.
-		// The job here is just to send it back.
-
-		// Make sure we got a row with the person, then prepare JSON to send back
-		if (error || result == null || result.length != 1) {
-			response.status(500).json({success: false, data: error});
-		} else {
-			var person = result[0];
-			response.status(200).json(result[0]);
-		}
-	});
-}
+    callback(null, results.rows[0])
+  })
+});
 
 
 
-//DESTROY
+
+
+************/
