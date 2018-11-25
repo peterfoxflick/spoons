@@ -93,8 +93,6 @@ function locationCreateDB(name, callback) {
 
 //READ
 function locationGetDB(id, callback) {
-  //Check that name is string and min length
-  if ((typeof id) == "number"){
     var sql = "SELECT * FROM location WHERE id = $1::int";
 
     // We now set up an array of all the parameters we will pass to fill the
@@ -122,7 +120,6 @@ function locationGetDB(id, callback) {
       // (The first parameter is the error variable, so we will pass null.)
       callback(null, result.rows[0]);
     });
-  }
 }
 
 function createLocation(request, response) {
@@ -162,8 +159,7 @@ function getLocation(request, response) {
 		if (error || result == null || result.length != 1) {
 			response.status(500).json({success: false, data: error});
 		} else {
-			var person = result[0];
-			response.status(200).json(result[0]);
+			response.status(200).json(result);
 		}
 	});
 }
