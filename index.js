@@ -18,8 +18,7 @@ var game = require('./controllers/game.js');
 
 var app = express()
 
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
@@ -79,6 +78,8 @@ app.post('/game/new', function(request, response) {
 
 app.post('/game/start', function(request, response) {
 	game.start(request, response, pool);
+  enroll.target(request, response, pool);
+
 });
 
 
@@ -97,9 +98,6 @@ app.post('/enroll/tag', function(request, response) {
 	enroll.tag(request, response, pool);
 });
 
-app.get('/target', function(request, response) {
-	enroll.target(request, response, pool);
-});
 
 
 
@@ -125,6 +123,8 @@ app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 var passport = require('passport');
 
+app.use(passport.initialize())
+app.use(passport.session())
 
 passport.use(new LocalStrategy((username, password, callback) => {
   var sql = "SELECT id, username, password, type FROM users WHERE username=$1";
