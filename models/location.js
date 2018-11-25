@@ -46,38 +46,35 @@ exports.create = function(name, callback) {
 }
 
 //READ
-exports.get = function(id, callback) {
-  //Check that name is string and min length
-  if ((typeof id) == "number"){
-    var sql = "SELECT * FROM member_copy WHERE id = $1::int";
+exports.get = (id, callback) {
+      var sql = "SELECT * FROM location WHERE id = $1::int";
 
-    // We now set up an array of all the parameters we will pass to fill the
-    // placeholder spots we left in the query.
-    var params = [id];
+      // We now set up an array of all the parameters we will pass to fill the
+      // placeholder spots we left in the query.
+      var params = [id];
 
-    // This runs the query, and then calls the provided anonymous callback function
-    // with the results.
-    pool.query(sql, params, function(err, result) {
-      // If an error occurred...
-      if (err) {
-        console.log("Error in query: ")
-        console.log(err);
-        callback(err, null);
-      }
+      // This runs the query, and then calls the provided anonymous callback function
+      // with the results.
+      pool.query(sql, params, function(err, result) {
+        // If an error occurred...
+        if (err) {
+          console.log("Error in query: ")
+          console.log(err);
+          callback(err, null);
+        }
 
-      // Log this to the console for debugging purposes.
-      console.log("Found location: " + JSON.stringify(result.rows[0]));
+        // Log this to the console for debugging purposes.
+        console.log("Found location: " + JSON.stringify(result.rows[0]));
 
 
-      // When someone else called this function, they supplied the function
-      // they wanted called when we were all done. Call that function now
-      // and pass it the results.
+        // When someone else called this function, they supplied the function
+        // they wanted called when we were all done. Call that function now
+        // and pass it the results.
 
-      // (The first parameter is the error variable, so we will pass null.)
-      callback(null, result.rows[0]);
-    });
+        // (The first parameter is the error variable, so we will pass null.)
+        callback(null, result.rows[0]);
+      });
   }
-}
 
 //UPDATE
 exports.update = function(id, name, callback) {
