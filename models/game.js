@@ -55,7 +55,7 @@ exports.get = function(id, pool, callback) {
 
 
 //UPDATE
-exports.start = function(id, callback) {
+exports.start = function(id, pool, callback) {
   //Check that name is string and min length
     var sql = "UPDATE game SET state = 1 WHERE id = $1::int";
 
