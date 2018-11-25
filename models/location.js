@@ -1,5 +1,8 @@
 var exports = module.exports = {};
 
+
+
+const { Pool } = require("pg"); // This is the postgres database connection module.
 const pool = new Pool({connectionString: connectionString});
 
 
