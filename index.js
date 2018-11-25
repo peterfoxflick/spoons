@@ -187,8 +187,6 @@ function locationGetDB(id, callback) {
   }
 }
 
-}
-
 function createLocation(request, response) {
 	// First get the person's id
 	var name = request.query.name;
