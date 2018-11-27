@@ -90,7 +90,7 @@ exports.start = function(game_id, pool, callback) {
         var i = ids.length / 2;
 
         var shift = ids.slice(i).concat(ids.slice(0,1));
-        for (var i = 0; i < results.rows.length; i++) {
+        for (var i = 0; i < result.rows.length; i++) {
           results.rows[i]["target_id"] = shift[i];
         }
 
