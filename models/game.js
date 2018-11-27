@@ -3,7 +3,6 @@ var exports = module.exports = {};
 
 
 //CREATE
-
 exports.create = function(title, host_id, state, location_id, pool, callback) {
   //Check that name is string and min length
     var sql = "INSERT INTO game (title, host_id, state, location_id) VALUES ($1, $2, $3, $4)";

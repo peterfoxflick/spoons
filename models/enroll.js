@@ -80,12 +80,16 @@ exports.start = function(game_id, pool, callback) {
 
         console.log("Showing enrollment");
 
-        // Log this to the console for debugging purposes.
+        // Go through and add a target to each person
         for (var i = 0; i < result.rows.length; i++) {
+
           console.log("Found enrollment: " + JSON.stringify(result.rows[i]));
+
         }
 
         console.log("end enrollment");
+
+        callback(null, JSON.stringify(result.rows));
 
 
 
