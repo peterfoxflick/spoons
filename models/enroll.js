@@ -89,7 +89,7 @@ exports.start = function(game_id, pool, callback) {
 
         console.log("end enrollment");
 
-        callback(null, JSON.stringify(result.rows));
+        callback(null, result.rows);
 
 
 
