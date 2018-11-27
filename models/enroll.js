@@ -89,9 +89,11 @@ exports.start = function(game_id, pool, callback) {
 
         var i = ids.length / 2;
 
-        var shift = ids.slice(i).concat(ids.slice(0,1));
+        var shift = ids.slice(i).concat(ids.slice(0,i));
         for (var i = 0; i < result.rows.length; i++) {
           result.rows[i]["target_id"] = shift[i];
+          console.log("Changed enrollment: " + JSON.stringify(result.rows[i]));
+
         }
 
         console.log("end enrollment");
