@@ -107,7 +107,7 @@ exports.start = function(game_id, pool, callback) {
         }
         sql += ") as c(target_id, id) where c.target_id = t.target_id;"
 
-        var params = [id];
+        var params = [];
 
         // This runs the query, and then calls the provided anonymous callback function
         // with the results.
