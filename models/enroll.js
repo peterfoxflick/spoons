@@ -87,26 +87,39 @@ exports.start = function(game_id, pool, callback) {
           console.log("Found enrollment: " + JSON.stringify(result.rows[i]));
         }
 
+        //Shift the numbers over
         var i = ids.length / 2;
-
         var shift = ids.slice(i).concat(ids.slice(0,i));
+
+
+        var sql = "UPDATE enrollment AS e SET id = c.id from (values "
+
+        // Apply shift
         for (var i = 0; i < result.rows.length; i++) {
           result.rows[i]["target_id"] = shift[i];
           console.log("Changed enrollment: " + JSON.stringify(result.rows[i]));
 
+          sql += "( " + result.rows[i]["id"] + ", " + result.rows[i]["target_id"] ")"
+          if(i != result.rows.length - 1) {
+            sql += ", ";
+          }
+
         }
+        sql += ") as c(target_id, id) where c.target_id = t.target_id;"
 
-        console.log("end enrollment");
+        var params = [id];
 
-
-
-
-
+        // This runs the query, and then calls the provided anonymous callback function
+        // with the results.
+        pool.query(sql, params, function(err, result) {
+          // If an error occurred...
+          if (err) {
+            console.log("Error in query: ")
+            console.log(err);
+          }
+        });
 
         callback(null, result.rows);
-
-
-
 
       });
   }
