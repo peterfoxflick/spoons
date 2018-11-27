@@ -81,13 +81,25 @@ exports.start = function(game_id, pool, callback) {
         console.log("Showing enrollment");
 
         // Go through and add a target to each person
+        var ids = []
         for (var i = 0; i < result.rows.length; i++) {
-
+          ids.push(result.rows[i]["user_id"]);
           console.log("Found enrollment: " + JSON.stringify(result.rows[i]));
+        }
 
+        var i = ids.length / 2;
+
+        var shift = ids.slice(i).concat(ids.slice(0,1));
+        for (var i = 0; i < results.rows.length; i++) {
+          results.rows[i]["target_id"] = shift[i];
         }
 
         console.log("end enrollment");
+
+
+
+
+
 
         callback(null, result.rows);
 
