@@ -127,7 +127,7 @@ exports.start = function(game_id, pool, callback) {
 
 
 //TARGET
-exports.target = function(user_id, game_id, callback) {
+exports.target = function(user_id, game_id, pool, callback) {
   //Check that name is string and min length
     var sql = "SELECT * FROM enrollment WHERE user_id = $1::int AND game_id = $2::int";
 
