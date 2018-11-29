@@ -92,7 +92,7 @@ exports.start = function(game_id, pool, callback) {
         var shift = ids.slice(i).concat(ids.slice(0,i));
 
 
-        var sql = "update enrollment from (values "
+        var sql = "update enrollment as e set target_id = e.target_id from (values "
 
         // Apply shift
         for (var i = 0; i < result.rows.length; i++) {
@@ -105,7 +105,7 @@ exports.start = function(game_id, pool, callback) {
           }
 
         }
-        sql += ") as e1(id, target_id) where e1.id = e.id;"
+        sql += ") as e1(id, target_id) where e1.id = e.id RETURNING id, user_id, target_id;"
         console.log(sql);
 
         var params = [];
