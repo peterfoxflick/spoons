@@ -100,7 +100,7 @@ app.post('/enroll/tag', function(request, response) {
 
 app.get('/target', function(request, response) {
 	enroll.target(request, response, pool);
-});
+}); 
 
 
 
