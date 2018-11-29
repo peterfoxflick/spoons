@@ -152,7 +152,6 @@ exports.target = function(user_id, game_id, callback) {
       callback(null, result.rows[0]);
     });
   }
-}
 
 
 
