@@ -92,10 +92,7 @@ exports.start = function(game_id, pool, callback) {
         var shift = ids.slice(i).concat(ids.slice(0,i));
 
 
-        var sql = "update enrollment as e set target_id = e.target_id from (values
-  (1, target_id),
-
- "
+        var sql = "update enrollment as e set target_id = e.target_id from (values "
 
         // Apply shift
         for (var i = 0; i < result.rows.length; i++) {
