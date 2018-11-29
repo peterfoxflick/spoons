@@ -92,20 +92,23 @@ exports.start = function(game_id, pool, callback) {
         var shift = ids.slice(i).concat(ids.slice(0,i));
 
 
-        var sql = "UPDATE enrollment AS t SET id = c.id from (values "
+        var sql = "update enrollment as e set target_id = e.target_id from (values
+  (1, target_id),
+
+ "
 
         // Apply shift
         for (var i = 0; i < result.rows.length; i++) {
           result.rows[i]["target_id"] = shift[i];
           console.log("Changed enrollment: " + JSON.stringify(result.rows[i]));
 
-          sql += "( " + result.rows[i]["target_id"] + ", " + result.rows[i]["id"] + ")"
+          sql += "( " + result.rows[i]["id"] + ", " + result.rows[i]["target_id"] + ")"
           if(i != result.rows.length - 1) {
             sql += ", ";
           }
 
         }
-        sql += ") as c(target_id, id) where c.target_id = t.target_id;"
+        sql += ") as e1(id, target_id) where e1.id = e.id;"
         console.log(sql);
 
         var params = [];
