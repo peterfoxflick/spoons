@@ -78,7 +78,7 @@ app.post('/game/new', function(request, response) {
 });
 
 app.post('/game/start', function(request, response) {
-	//game.start(request, response, pool);
+	game.start(request, response, pool);
   enroll.start(request, response, pool);
 });
 
