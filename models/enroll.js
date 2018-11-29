@@ -99,13 +99,13 @@ exports.start = function(game_id, pool, callback) {
           result.rows[i]["target_id"] = shift[i];
           console.log("Changed enrollment: " + JSON.stringify(result.rows[i]));
 
-          sql += "( " + result.rows[i]["id"] + ", " + result.rows[i]["target_id"] + ")"
+          sql += "(" + result.rows[i]["id"] + "," + result.rows[i]["target_id"] + ")"
           if(i != result.rows.length - 1) {
             sql += ", ";
           }
 
         }
-        sql += ") as e1(id, target_id) where e1.id = e.id RETURNING id, user_id, target_id;"
+        sql += ") as e1(id, target_id) where e1.id = e.id RETURNING e.id, e.user_id, e.target_id;"
         console.log(sql);
 
         var params = [];
