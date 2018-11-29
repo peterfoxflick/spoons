@@ -79,7 +79,7 @@ exports.get = function(request, response, pool) {
 					if (error || result == null) {
 						response.status(500).json({success: false, data: error});
 					} else {
-						response.status(200).json(result);
+						response.status(200).json({target: result.target_id});
 					}
 				});
 			}
