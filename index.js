@@ -39,6 +39,7 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res) => res.render('pages/index'));
+app.get('/play', (req, res) => res.render('pages/play'));
 
 
 //LOCATIONS ///////////////////////////////////////////////////////
@@ -100,7 +101,7 @@ app.post('/enroll/tag', function(request, response) {
 
 app.get('/target', function(request, response) {
 	enroll.target(request, response, pool);
-}); 
+});
 
 
 
