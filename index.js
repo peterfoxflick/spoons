@@ -86,6 +86,11 @@ app.post('/game/start', function(request, response) {
   enroll.start(request, response, pool);
 });
 
+app.get('/game/location', function(request, response) {
+	game.getFromUserid(request, response, pool);
+});
+
+
 
 
 //ENROLLMENT ///////////////////////////////////////////////////////
