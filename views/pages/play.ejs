@@ -33,7 +33,7 @@
 
 <script>
   function mainLoad(){
-    $.get("/enroll/my?user_id=" + user_id, function(data){
+    $.get("/enroll/my?user_id=" + <%= user_id %>, function(data){
       console.log(data);
     })
 
