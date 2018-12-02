@@ -80,7 +80,7 @@ exports.get = function(id, pool, callback) {
 
 
     exports.getOpenGamesFromUserId = function(id, pool, callback) {
-          var sql = "SELECT game.title, location.name FROM game INNER JOIN location on game.location_id = location.id INNER JOIN player on location.id = player.location_id WHERE player.id = $1 AND game.state = 0";
+          var sql = "SELECT game.id, game.title, location.name FROM game INNER JOIN location on game.location_id = location.id INNER JOIN player on location.id = player.location_id WHERE player.id = $1 AND game.state = 0";
 
           // We now set up an array of all the parameters we will pass to fill the
           // placeholder spots we left in the query.
