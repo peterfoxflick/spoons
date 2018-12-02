@@ -84,7 +84,8 @@ exports.edit = function(request, response, pool) {
 					} else {
 						response.status(200).json({success: true, data: result});
 					}
-				});
+				})
+				};
 
 
 			exports.getNewGamesFromUserId = function(request, response, pool) {
