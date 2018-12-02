@@ -2,7 +2,7 @@ var exports = module.exports = {};
 var model = require("../models/enroll.js");
 
 
-exports.create = function(request, response, pool) {
+exports.new = function(request, response, pool) {
 
 	var user_id = request.query.user_id;
 	var game_id = request.query.game_id;
