@@ -31,6 +31,19 @@
     </div>
   </div>
 
+<script>
+  function mainLoad(){
+    $.get("/enroll/my?user_id=" + user_id, function(data){
+      console.log(data);
+    })
+
+
+  }
+
+  mainLoad();
+
+
+</script>
 
 </body>
 </html>
