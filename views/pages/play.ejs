@@ -18,11 +18,6 @@
     </div>
     <div class="row">
       <div class="col">
-        <h1 class="display-2">Begin List</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
         <h1 class="display-2">Join a Game</h1>
         <ul class="list-group" id="new-games-list">
         </ul>
@@ -50,11 +45,17 @@
       var r = data.data;
       r.forEach(function(e){
         console.log(e);
-        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <span class="badge badge-primary badge-pill">Button Here</span></li>');
+        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
       })
     })
   }
 
+
+function joinGame(id){
+  $.post("/enroll/add?user_id=" + <%= user_id %> + "&game_id=" + id, function(data){
+      mainLoad();
+    })
+  }
 
   mainLoad();
 
