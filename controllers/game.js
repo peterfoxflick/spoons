@@ -68,13 +68,13 @@ exports.edit = function(request, response, pool) {
 		}
 
 
-		exports.getFromUserId = function(request, response, pool) {
+		exports.getCurrentFromUserId = function(request, response, pool) {
 
 				// First get the person's id
 				var id = request.query.user_id;
 
 				// use a helper function to query the DB, and provide a callback for when it's done
-				model.getAllWithUserId(id, pool, function(error, result) {
+				model.getCurrentFromUserId(id, pool, function(error, result) {
 					// This is the callback function that will be called when the DB is done.
 					// The job here is just to send it back.
 
@@ -87,13 +87,13 @@ exports.edit = function(request, response, pool) {
 				});
 
 
-			exports.getFromUserid = function(request, response, pool) {
+			exports.getNewGamesFromUserId = function(request, response, pool) {
 
 					// First get the person's id
 					var id = request.query.user_id;
 
 					// use a helper function to query the DB, and provide a callback for when it's done
-					model.getFromUserid(id, pool, function(error, result) {
+					model.getOpenGamesFromUserId(id, pool, function(error, result) {
 						// This is the callback function that will be called when the DB is done.
 						// The job here is just to send it back.
 

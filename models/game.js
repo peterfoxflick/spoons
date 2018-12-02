@@ -53,7 +53,7 @@ exports.get = function(id, pool, callback) {
   }
 
   //READ
-  exports.getAllWithUserId = function(id, pool, callback) {
+  exports.getCurrentFromUserId = function(id, pool, callback) {
         var sql = "SELECT game.title, player.name FROM game INNER JOIN enrollment on enrollment.game_id = game.id INNER JOIN player on player.id = enrollment.target_id WHERE enrollment.user_id = $1";
 
         // We now set up an array of all the parameters we will pass to fill the
@@ -79,7 +79,7 @@ exports.get = function(id, pool, callback) {
     }
 
 
-    exports.getFromUserid = function(id, pool, callback) {
+    exports.getOpenGamesFromUserId = function(id, pool, callback) {
           var sql = "SELECT game.title, location.name FROM game INNER JOIN location on game.location_id = location.id INNER JOIN player on location.id = player.location_id WHERE player.id = $1 AND game.state = 0";
 
           // We now set up an array of all the parameters we will pass to fill the

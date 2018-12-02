@@ -87,7 +87,7 @@ app.post('/game/start', function(request, response) {
 });
 
 app.get('/game/location', function(request, response) {
-	game.getFromUserid(request, response, pool);
+	game.getNewGamesFromUserId(request, response, pool);
 });
 
 
@@ -104,7 +104,7 @@ app.post('/enroll/start', function(request, response) {
 });
 
 app.get('/enroll/my', function(request, response) {
-	game.getFromUserId(request, response, pool);
+	game.getCurrentFromUserId(request, response, pool);
 });
 
 app.post('/enroll/tag', function(request, response) {
