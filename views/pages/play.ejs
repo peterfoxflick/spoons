@@ -52,7 +52,6 @@
 
       $.get("/game/open?user_id=" + <%= user_id %>, function(data){
         var r = data.data;
-        $("#new-games-list").empty();
         r.forEach(function(e){
           console.log(e);
           $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
