@@ -54,7 +54,7 @@ exports.get = function(id, pool, callback) {
 
   //READ
   exports.getAllWithUserId = function(id, pool, callback) {
-        var sql = "SELECT * FROM game INNER JOIN enrollment on enrollment.game_id = game.id WHERE enrollment.user_id = $1;";
+        var sql = "SELECT game.title, player.name FROM game INNER JOIN enrollment on enrollment.game_id = game.id INNER JOIN player on player.id = enrollment.target_id WHERE enrollment.user_id = $1;";
 
         // We now set up an array of all the parameters we will pass to fill the
         // placeholder spots we left in the query.
