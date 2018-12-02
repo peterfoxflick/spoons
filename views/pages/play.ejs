@@ -41,15 +41,25 @@
       })
     })
 
-
-    $.get("/game/location?user_id=" + <%= user_id %>, function(data){
+    $.get("/enroll/joined?user_id=" + <%= user_id %>, function(data){
       var r = data.data;
       $("#new-games-list").empty();
       r.forEach(function(e){
         console.log(e);
-        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
+        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-warning">Leave</button></li>');
+      })
+
+
+      $.get("/game/open?user_id=" + <%= user_id %>, function(data){
+        var r = data.data;
+        $("#new-games-list").empty();
+        r.forEach(function(e){
+          console.log(e);
+          $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
+        })
       })
     })
+
   }
 
 

@@ -86,9 +86,12 @@ app.post('/game/start', function(request, response) {
   enroll.start(request, response, pool);
 });
 
-app.get('/game/location', function(request, response) {
+app.get('/game/open', function(request, response) {
 	game.getNewGamesFromUserId(request, response, pool);
 });
+
+
+
 
 
 
@@ -105,6 +108,10 @@ app.post('/enroll/start', function(request, response) {
 
 app.get('/enroll/my', function(request, response) {
 	game.getCurrentFromUserId(request, response, pool);
+});
+
+app.get('/enroll/joined', function(request, response) {
+	game.getOpenGamesFromUserIdWhereJoined(request, response, pool);
 });
 
 app.post('/enroll/tag', function(request, response) {
