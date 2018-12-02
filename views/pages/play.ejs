@@ -42,14 +42,11 @@
   function mainLoad(){
     $.get("/enroll/my?user_id=" + <%= user_id %>, function(data){
       var list = document.getElementById("target-list");
-      data.forEach(function(item){
-        var li = document.createElement("li");
-        list.append('<li class="list-group-item d-flex justify-content-between align-items-center">' + item.name + ' - ' + item.title + ' <span class="badge badge-primary badge-pill">Button Here</span></li>')
+      for(var i = 0; i < data.length; i++){
+        list.append('<li class="list-group-item d-flex justify-content-between align-items-center">' + item.name + ' - ' + item.title + ' <span class="badge badge-primary badge-pill">Button Here</span></li>');
+      }
       })
-    })
-
-
-  }
+    }
 
   mainLoad();
 
