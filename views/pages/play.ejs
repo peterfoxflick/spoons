@@ -43,9 +43,11 @@
 
     $.get("/enroll/joined?user_id=" + <%= user_id %>, function(data){
       var r = data.data;
+      var joinedGames = [];
       $("#new-games-list").empty();
       r.forEach(function(e){
         console.log(e);
+        joinedGames.push(e.id);
         $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-warning">Leave</button></li>');
       })
 
@@ -54,7 +56,9 @@
         var r = data.data;
         r.forEach(function(e){
           console.log(e);
-          $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
+          if(joinedGames.indexOf(e.id) == -1) {
+            $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="joinGame(' + e.id + ')" class="btn btn-outline-success">Join</button></li>');
+          }
         })
       })
     })
