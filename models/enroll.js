@@ -34,6 +34,32 @@ exports.create = function(user_id, game_id, pool, callback) {
     });
 }
 
+//UPDATE
+exports.update = function(user_id, game_id, target_id, pool, callback) {
+  //Check that name is string and min length
+  UPDATE employees SET sales_count = sales_count + 1 WHERE id =
+
+    var sql = "UPDATE enrollment SET target_id = $1 WHERE game_id = $2 AND user_id = $3";
+
+    // We now set up an array of all the parameters we will pass to fill the
+    // placeholder spots we left in the query.
+    var params = [target_id, user_id, game_id];
+
+    // This runs the query, and then calls the provided anonymous callback function
+    // with the results.
+    pool.query(sql, params, function(err) {
+      // If an error occurred...
+      if (err) {
+        console.log("Error in query: ")
+        console.log(err);
+        callback(err);
+      }
+
+      // (The first parameter is the error variable, so we will pass null.)
+      callback(null);
+    });
+}
+
 //READ
 exports.get = function(id, pool, callback) {
       var sql = "SELECT * FROM enrollment WHERE id = $1::int";
@@ -134,6 +160,33 @@ exports.target = function(user_id, game_id, pool, callback) {
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
     var params = [user_id, game_id];
+
+    // This runs the query, and then calls the provided anonymous callback function
+    // with the results.
+    pool.query(sql, params, function(err, result) {
+      // If an error occurred...
+      if (err) {
+        console.log("Error in query: ")
+        console.log(err);
+        callback(err, null);
+      }
+
+      // Log this to the console for debugging purposes.
+      console.log("Got Target: " + JSON.stringify(result.rows[0]));
+
+      // (The first parameter is the error variable, so we will pass null.)
+      callback(null, result.rows[0]);
+    });
+  }
+
+//TARGET
+exports.getUserFromTarget = function(game_id, target_id, pool, callback) {
+  //Check that name is string and min length
+    var sql = "SELECT * FROM enrollment WHERE target_id = $1::int AND game_id = $2::int";
+
+    // We now set up an array of all the parameters we will pass to fill the
+    // placeholder spots we left in the query.
+    var params = [target_id, game_id];
 
     // This runs the query, and then calls the provided anonymous callback function
     // with the results.

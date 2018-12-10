@@ -163,3 +163,55 @@ exports.start = function(id, pool, callback) {
 
 
 //DESTROY
+exports.delete = function(game_id, user_id, pool, callback) {
+  //First get their targe id
+    var sql = "SELECT * FROM enrollment WHERE game_id = $1 AND user_id = $2";
+
+    // We now set up an array of all the parameters we will pass to fill the
+    // placeholder spots we left in the query.
+    var params = [game_id, user_id];
+
+    // This runs the query, and then calls the provided anonymous callback function
+    // with the results.
+    pool.query(sql, params, function(err, result) {
+      // If an error occurred...
+      if (err) {
+        console.log("Error in query: ")
+        console.log(err);
+        callback(err, null);
+      }
+
+      // Log this to the console for debugging purposes.
+      console.log("Updated game: " + id);
+
+      // (The first parameter is the error variable, so we will pass null.)
+      callback(null);
+    });
+
+
+
+
+
+    var sql = "DELETE FROM enrollment WHERE game_id = $1 AND user_id = $2";
+
+    // We now set up an array of all the parameters we will pass to fill the
+    // placeholder spots we left in the query.
+    var params = [game_id, user_id];
+
+    // This runs the query, and then calls the provided anonymous callback function
+    // with the results.
+    pool.query(sql, params, function(err, result) {
+      // If an error occurred...
+      if (err) {
+        console.log("Error in query: ")
+        console.log(err);
+        callback(err, null);
+      }
+
+      // Log this to the console for debugging purposes.
+      console.log("Updated game: " + id);
+
+      // (The first parameter is the error variable, so we will pass null.)
+      callback(null);
+    });
+  }

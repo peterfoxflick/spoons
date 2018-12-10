@@ -1,0 +1,33 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Project Title / One sentence description:
+Spoons, a game of tag
+
+2. Copy and paste the URL for your web application (if applicable):
+https://frozen-mountain-30601.herokuapp.com/play?user_id=1
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/peterfoxflick/spoons
+
+4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
+The page loads the games currently and one can join new games
+
+5. Describe the features that are not yet working correctly.
+One cannot tag a player or remove yourself from a game
+
+6. Please select the category you feel best describes your assignment:
+A - Some attempt was made
+B - Developing, but significantly deficient
+C - Slightly deficient, but still mostly adequate
+D - Meets requirements
+E - Shows creativity and excels above and beyond requirements
+*E*
+
+7. Provide a brief justification (1-2 sentences) for selecting that category.
+The site is both functional and beautiful.
+
+8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+
+
+
+https://gist.github.com/manjeshpv/84446e6aa5b3689e8b84

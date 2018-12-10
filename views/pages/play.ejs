@@ -36,7 +36,7 @@
       var r = data.data;
       $("#target-list").empty();
       r.forEach(function(e){
-        console.log(e);
+        console.log("THIS IS E" + e);
         $("#target-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.name + ' - ' + e.title + ' <span class="badge badge-primary badge-pill">Button Here</span></li>');
       })
     })
@@ -68,6 +68,12 @@
 
 function joinGame(id){
   $.post("/enroll/add?user_id=" + <%= user_id %> + "&game_id=" + id, function(data){
+      mainLoad();
+    })
+  }
+
+function leaveGame(id){
+  $.post("/enroll/remove?user_id=" + <%= user_id %> + "&game_id=" + id, function(data){
       mainLoad();
     })
   }

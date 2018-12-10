@@ -102,6 +102,10 @@ app.post('/enroll/add', function(request, response) {
 	enroll.new(request, response, pool);
 });
 
+app.post('/enroll/remove', function(request, response) {
+	enroll.remove(request, response, pool);
+});
+
 app.post('/enroll/start', function(request, response) {
 	enroll.start(request, response, pool);
 });
