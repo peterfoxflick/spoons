@@ -36,7 +36,8 @@
       var r = data.data;
       $("#target-list").empty();
       r.forEach(function(e){
-        console.log("THIS IS E" + e);
+        console.log("THIS IS E");
+        console.log(e);
         $("#target-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.name + ' - ' + e.title + ' <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-danger">I Got Hit</button></li>');
       })
     })
