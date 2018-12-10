@@ -33,7 +33,7 @@ exports.remove = function(request, response, pool) {
 				response.status(500).json({success: false, data: error});
 			} else {
 				var target_id = tResult.target_id;
-				console.log("Target id is = " tResult.target_id);
+				console.log("Target id is = " + tResult.target_id);
 				//then get who has them
 				if(target_id) {
 					model.getUserFromTarget(game_id, user_id, pool, function(error, gResult) {
