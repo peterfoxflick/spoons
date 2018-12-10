@@ -49,7 +49,7 @@
       r.forEach(function(e){
         console.log(e);
         joinedGames.push(e.id);
-        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-warning">Leave</button></li>');
+        $("#new-games-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.title + ' - ' + e.name + ' <button type="button" onclick="startGame(' + e.id + ')" class="btn btn-outline-success">Start Game</button> <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-warning">Leave</button></li>');
       })
 
 
@@ -75,6 +75,12 @@ function joinGame(id){
 
 function leaveGame(id){
   $.post("/enroll/remove?user_id=" + <%= user_id %> + "&game_id=" + id, function(data){
+      mainLoad();
+    })
+  }
+
+function startGame(id){
+  $.post("/game/start?id=" + id, function(data){
       mainLoad();
     })
   }
