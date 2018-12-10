@@ -52,7 +52,8 @@ exports.remove = function(request, response, pool) {
 			}
 		});
 
-	})
+	}
+})
 
 
 }
