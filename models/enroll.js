@@ -37,7 +37,6 @@ exports.create = function(user_id, game_id, pool, callback) {
 //UPDATE
 exports.update = function(user_id, game_id, target_id, pool, callback) {
   //Check that name is string and min length
-  UPDATE employees SET sales_count = sales_count + 1 WHERE id =
 
     var sql = "UPDATE enrollment SET target_id = $1 WHERE game_id = $2 AND user_id = $3";
 
