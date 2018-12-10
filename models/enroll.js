@@ -112,10 +112,16 @@ exports.start = function(game_id, pool, callback) {
           console.log("Found enrollment: " + JSON.stringify(result.rows[i]));
         }
 
-        //Shift the numbers over
-        var i = ids.length / 2;
-        var shift = ids.slice(i).concat(ids.slice(0,i));
+        //
+        // //Shift the numbers over
+        // var i = ids.length / 2;
+        // var shift = ids.slice(i).concat(ids.slice(0,i));
+        //
 
+        //Shift numbers over by one
+        var lastId = ids[ids.length - 1];
+        ids.unshift(lastId);
+        var shift = ids;
 
         var sql = "update enrollment as e set target_id = e1.target_id from (values "
 
