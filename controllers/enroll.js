@@ -34,23 +34,33 @@ exports.remove = function(request, response, pool) {
 			} else {
 				var target_id = tResult.target_id;
 				//then get who has them
-				model.getUserFromTarget(game_id, user_id, pool, function(error, gResult) {
-						if (error) {
-							response.status(500).json({success: false, data: error});
-						} else {
-							//now update who has them to get their target
-							model.update(gResult.id, target_id, pool, function(error, result) {
-								//finaly delete them from the game
-								model.delete(user_id, game_id, pool, function(error) {
-									if (error) {
-										response.status(500).json({success: false, data: error});
-									} else {
-										response.status(200).json({success: true});
-									}
-							});
-						})
+				if(target_id) {
+					model.getUserFromTarget(game_id, user_id, pool, function(error, gResult) {
+							if (error) {
+								response.status(500).json({success: false, data: error});
+							} else {
+								//now update who has them to get their target
+								model.update(gResult.id, target_id, pool, function(error, result) {
+									//finaly delete them from the game
+									model.delete(user_id, game_id, pool, function(error) {
+										if (error) {
+											response.status(500).json({success: false, data: error});
+										} else {
+											response.status(200).json({success: true});
+										}
+										});
+								})
+					}
+				});
+			} else {
+				model.delete(user_id, game_id, pool, function(error) {
+					if (error) {
+						response.status(500).json({success: false, data: error});
+					} else {
+						response.status(200).json({success: true});
+					}
+					});
 			}
-		});
 
 	}
 })
