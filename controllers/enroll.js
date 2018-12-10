@@ -40,7 +40,7 @@ exports.remove = function(request, response, pool) {
 								response.status(500).json({success: false, data: error});
 							} else {
 								//now update who has them to get their target
-								model.update(gResult.id, target_id, pool, function(error, result) {
+								model.update(gResult.id, game_id, target_id, pool, function(error, result) {
 									//finaly delete them from the game
 									model.delete(tResult.id, pool, function(error) {
 										if (error) {
