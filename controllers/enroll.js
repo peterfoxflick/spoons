@@ -33,6 +33,7 @@ exports.remove = function(request, response, pool) {
 				response.status(500).json({success: false, data: error});
 			} else {
 				var target_id = tResult.target_id;
+				console.log("Target id is = " tResult.target_id);
 				//then get who has them
 				if(target_id) {
 					model.getUserFromTarget(game_id, user_id, pool, function(error, gResult) {
@@ -40,7 +41,8 @@ exports.remove = function(request, response, pool) {
 								response.status(500).json({success: false, data: error});
 							} else {
 								//now update who has them to get their target
-								model.update(gResult.user_id, game_id, target_id, pool, function(error, result) {
+								console.log("About to update where enroll id = " + gResult.id);
+								model.update(gResult.id, target_id, pool, function(error, result) {
 									//finaly delete them from the game
 									model.delete(tResult.id, pool, function(error) {
 										if (error) {

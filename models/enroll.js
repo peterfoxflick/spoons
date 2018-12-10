@@ -35,14 +35,14 @@ exports.create = function(user_id, game_id, pool, callback) {
 }
 
 //UPDATE
-exports.update = function(user_id, game_id, target_id, pool, callback) {
+exports.update = function(id, target_id, pool, callback) {
   //Check that name is string and min length
 
-    var sql = "UPDATE enrollment SET target_id = $1 WHERE game_id = $2 AND user_id = $3";
+    var sql = "UPDATE enrollment SET target_id = $1 WHERE id = $2";
 
     // We now set up an array of all the parameters we will pass to fill the
     // placeholder spots we left in the query.
-    var params = [target_id, user_id, game_id];
+    var params = [target_id, id];
 
     // This runs the query, and then calls the provided anonymous callback function
     // with the results.
