@@ -28,18 +28,18 @@ exports.remove = function(request, response, pool) {
 	var game_id = request.query.game_id;
 
 	//First get that players target
-	model.target(user_id, game_id, pool, function(error, result) {
+	model.target(user_id, game_id, pool, function(error, tResult) {
 			if (error) {
 				response.status(500).json({success: false, data: error});
 			} else {
-				var target_id = result.target_id;
+				var target_id = tResult.target_id;
 				//then get who has them
-				model.getUserFromTarget(game_id, user_id, pool, function(error, result) {
+				model.getUserFromTarget(game_id, user_id, pool, function(error, gResult) {
 						if (error) {
 							response.status(500).json({success: false, data: error});
 						} else {
 							//now update who has them to get their target
-							model.update(result.id, target_id, pool, function(error, result) {
+							model.update(gResult.id, target_id, pool, function(error, result) {
 								//finaly delete them from the game
 								model.delete(user_id, game_id, pool, function(error) {
 									if (error) {
