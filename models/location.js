@@ -1,15 +1,6 @@
 var exports = module.exports = {};
 
 
-// SQL TABLE
-
-// CREATE TABLE location (
-//  id             SERIAL          NOT NULL,
-//  name           TEXT            NOT NULL,
-//  PRIMARY KEY( id )
-// );
-
-
 //CREATE
 exports.create = function(name, pool, callback) {
   //Check that name is string and min length
