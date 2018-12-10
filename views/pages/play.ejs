@@ -37,7 +37,7 @@
       $("#target-list").empty();
       r.forEach(function(e){
         console.log("THIS IS E" + e);
-        $("#target-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.name + ' - ' + e.title + ' <span class="badge badge-primary badge-pill">Button Here</span></li>');
+        $("#target-list").append('<li class="list-group-item d-flex justify-content-between align-items-center">' + e.name + ' - ' + e.title + ' <button type="button" onclick="leaveGame(' + e.id + ')" class="btn btn-outline-danger">I Got Hit</button></li>');
       })
     })
 
