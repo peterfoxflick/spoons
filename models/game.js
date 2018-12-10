@@ -133,7 +133,7 @@ exports.get = function(id, pool, callback) {
 
 
 //UPDATE
-exports.start = function(id, pool, callback) {
+exports.start = function(id, pool) {
   //Check that name is string and min length
     var sql = "UPDATE game SET state = 1 WHERE id = $1::int";
 
@@ -153,9 +153,6 @@ exports.start = function(id, pool, callback) {
 
       // Log this to the console for debugging purposes.
       console.log("Updated game: " + id);
-
-      // (The first parameter is the error variable, so we will pass null.)
-      callback(null);
     });
   }
 
