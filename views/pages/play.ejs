@@ -33,7 +33,7 @@
       var r = data.data;
       $("#target-list").empty();
 
-      if(r.length() > 0) {
+      if(r.length > 0) {
         r.forEach(function(e){
           console.log("THIS IS E");
           console.log(e);
@@ -67,7 +67,7 @@
           }
         })
 
-        if (r.length() == 0) {
+        if (r.length == 0) {
           $("#new-games-list").append('<p>There are currently no open games in your area. Check back soon for more games</p>');
         }
 
