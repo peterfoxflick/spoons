@@ -41,6 +41,9 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.render('pages/index'));
 
 app.get('/play', function(req, res){
+  var data = req.query.user_id;
+  if(data == null)
+    res.redirect('/');
   res.render('pages/play', { user_id: req.query.user_id });
 });
 
