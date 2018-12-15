@@ -8,35 +8,23 @@
 
   <% include ../partials/nav.ejs %>
 
-<div class="jumbotron">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 offseet-md-4">
-        <h1 class="display-2">Postage</h1>
-        <form method="POST" action="/postage">
-          <div class="form-group">
-            <label for="weight">Weight (oz)</label>
-            <div class="input-group">
-              <input type="number" class="form-control" id="weight" name="weight" placeholder="1" step=".01" min="0" max="13">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">oz</span>
-              </div>
-          </div>
-          <div class="form-group">
-            <label for="type">Type of Mail</label>
-            <select class="form-control" id="type" name="type">
-              <option value="stamp">Letters (Stamped)</option>
-              <option value="meter">Letters (Metered)</option>
-              <option value="flat">Large Evelopes (Flats)</option>
-              <option value="first-class">First-Class Package Service</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+      <div class="col">
+        <h1 class="display-2">Spoons</h1>
+        <ul class="list-group" id="target-list">
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h1 class="display-2">Join a Game</h1>
+        <ul class="list-group" id="new-games-list">
+        </ul>
       </div>
     </div>
   </div>
-</div>
+
 
 
 </body>
