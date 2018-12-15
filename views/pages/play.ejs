@@ -31,7 +31,8 @@
   function mainLoad(){
     $.get("/enroll/my?user_id=" + <%= user_id %>, function(data){
       var r = data.data;
-      $("#target-list").empty();
+      if(r.length > 0)
+        $("#target-list").empty();
       r.forEach(function(e){
         console.log("THIS IS E");
         console.log(e);
@@ -41,8 +42,9 @@
 
     $.get("/enroll/joined?user_id=" + <%= user_id %>, function(data){
       var r = data.data;
+      if(r.length > 0)
+        $("#new-games-list").empty();
       var joinedGames = [];
-      $("#new-games-list").empty();
       r.forEach(function(e){
         console.log(e);
         joinedGames.push(e.id);
