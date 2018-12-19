@@ -57,7 +57,9 @@ CREATE TABLE game (
 
 INSERT INTO game (title, host_id, state, location_id)
 VALUES
- ('Triwizard Tournament', 2, 0, 1);
+ ('Triwizard Tournament', 2, 0, 1),
+ ('Final Duel', 2, 0, 2)
+;
 
 
 
